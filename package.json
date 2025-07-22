@@ -1,0 +1,46 @@
+{
+  "name": "fusionauth-import-node-passport-example",
+  "version": "1.0.0",
+  "description": "Express Passport authentication example for FusionAuth migration",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "setup": "npm install && node scripts/setup.js",
+    "export": "node scripts/export_users_for_fusionauth.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "fusionauth",
+    "express",
+    "passport",
+    "authentication",
+    "oauth",
+    "migration"
+  ],
+  "author": "FusionAuth",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "bcrypt": "^5.1.1",
+    "sqlite3": "^5.1.6",
+    "connect-sqlite3": "^0.9.13",
+    "body-parser": "^1.20.2",
+    "express-flash": "^0.0.2",
+    "ejs": "^3.1.9",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+} 

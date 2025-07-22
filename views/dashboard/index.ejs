@@ -1,0 +1,155 @@
+<%- include('../layout') %>
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">
+            <i class="fas fa-tachometer-alt"></i>
+            Dashboard
+        </h2>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="mb-0"><%= users.length %></h4>
+                        <small>Total Users</small>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-users fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="mb-0"><%= users.filter(u => u.active).length %></h4>
+                        <small>Active Users</small>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-user-check fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="mb-0"><%= users.filter(u => u.provider === 'local').length %></h4>
+                        <small>Local Users</small>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-user fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="mb-0"><%= users.filter(u => u.provider === 'google').length %></h4>
+                        <small>OAuth Users</small>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fab fa-google fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-users"></i>
+                    Recent Users
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Provider</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Last Login</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.slice(0, 10).forEach(user => { %>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <% if (user.avatar) { %>
+                                                <img src="<%= user.avatar %>" alt="Avatar" class="table-avatar me-2">
+                                            <% } else { %>
+                                                <i class="fas fa-user-circle me-2" style="font-size: 32px; color: #6c757d;"></i>
+                                            <% } %>
+                                            <div>
+                                                <strong><%= user.name %></strong>
+                                                <% if (user.id === user.id) { %>
+                                                    <span class="badge bg-primary ms-1">You</span>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><%= user.email %></td>
+                                    <td>
+                                        <span class="badge bg-<%= user.provider === 'google' ? 'danger' : 'primary' %>">
+                                            <i class="fas fa-<%= user.provider === 'google' ? 'google' : 'user' %>"></i>
+                                            <%= user.provider %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <% if (user.active) { %>
+                                            <span class="badge bg-success">Active</span>
+                                        <% } else { %>
+                                            <span class="badge bg-warning">Inactive</span>
+                                        <% } %>
+                                    </td>
+                                    <td><%= new Date(user.createdAt).toLocaleDateString() %></td>
+                                    <td>
+                                        <% if (user.lastLoginAt) { %>
+                                            <%= new Date(user.lastLoginAt).toLocaleDateString() %>
+                                        <% } else { %>
+                                            <span class="text-muted">Never</span>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <a href="/users" class="btn btn-outline-primary">
+                        <i class="fas fa-list me-2"></i>
+                        View All Users
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
