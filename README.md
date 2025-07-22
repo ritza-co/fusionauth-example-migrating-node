@@ -32,7 +32,7 @@ npm install
 
 3. Set up environment variables:
 ```bash
-cp .env.example .env
+cp config.env.example .env
 ```
 
 Edit `.env` and configure:
@@ -54,6 +54,13 @@ GOOGLE_CLIENT_SECRET=your-google-client-secret
 ```bash
 npm run setup
 ```
+
+5. (Optional) Start FusionAuth for migration testing:
+```bash
+npm run fusionauth:up
+```
+
+FusionAuth will be available at: http://localhost:9011
 
 ## Usage
 
@@ -163,6 +170,44 @@ CREATE TABLE sessions (
 - `GET /users` - User management
 - `POST /users/:id/delete` - Delete user
 - `POST /users/:id/toggle-active` - Toggle user status
+
+## FusionAuth Integration
+
+This project includes a pre-configured FusionAuth instance for testing migrations:
+
+### Running FusionAuth
+
+```bash
+# Start FusionAuth with PostgreSQL and MailCatcher
+npm run fusionauth:up
+
+# View FusionAuth logs
+npm run fusionauth:logs
+
+# Stop FusionAuth
+npm run fusionauth:down
+```
+
+### FusionAuth Configuration
+
+The kickstart configuration includes:
+- **Express Passport Application**: Pre-configured OAuth application for this project
+- **API Key**: For programmatic access
+- **Email Templates**: Magic link and 2FA templates
+- **Custom Theme**: Styled interface
+- **Test Users**: Admin and regular user accounts
+
+### FusionAuth URLs
+
+- **FusionAuth Admin**: http://localhost:9011
+- **MailCatcher**: http://localhost:1080 (for email testing)
+- **Express App**: http://localhost:3000
+
+### Application Details
+
+- **Application ID**: `f47ac10b-58cc-4372-a567-0e02b2c3d479`
+- **Client Secret**: `super-secret-secret-that-should-be-regenerated-for-production`
+- **Redirect URL**: `http://localhost:3000/auth/fusionauth/callback`
 
 ## Migration to FusionAuth
 
