@@ -2,16 +2,6 @@
 
 A complete Express.js authentication system with Passport.js, featuring both local authentication (email/password) and OAuth (Google), designed for migration to FusionAuth.
 
-## Features
-
-- **Local Authentication**: Email/password login with bcrypt password hashing
-- **OAuth Authentication**: Google OAuth 2.0 integration
-- **Session Management**: SQLite-based session storage
-- **User Management**: Complete user CRUD operations
-- **Modern UI**: Bootstrap 5 responsive interface
-- **SQLite Database**: Lightweight database for development
-- **FusionAuth Ready**: Structured for easy migration to FusionAuth
-
 ## Prerequisites
 
 - Node.js 22.0.0 or higher
@@ -102,35 +92,6 @@ The setup script creates these test accounts (password: `password123`):
 5. Add `http://localhost:3000/auth/google/callback` to the authorized redirect URIs
 6. Copy the Client ID and Client Secret to your `.env` file
 
-## Project Structure
-
-```txt
-├── app.js                 # Main application file
-├── package.json           # Dependencies and scripts
-├── .env.example          # Environment variables template
-├── models/
-│   ├── database.js       # SQLite database connection
-│   └── user.js          # User model and methods
-├── routes/
-│   ├── auth.js          # Authentication routes
-│   └── dashboard.js     # Dashboard and user management routes
-├── views/
-│   ├── layout.ejs       # Main layout template
-│   ├── index.ejs        # Home page
-│   ├── error.ejs        # Error page
-│   ├── auth/
-│   │   ├── login.ejs    # Login page
-│   │   ├── register.ejs # Registration page
-│   │   └── profile.ejs  # User profile page
-│   └── dashboard/
-│       ├── index.ejs    # Dashboard overview
-│       └── users.ejs    # User management
-├── scripts/
-│   └── setup.js         # Database setup and seeding
-├── db/                  # SQLite database files (auto-created)
-└── public/              # Static assets
-```
-
 ## Database Schema
 
 ### Users Table
@@ -200,79 +161,6 @@ npm run fusionauth:logs
 npm run fusionauth:down
 ```
 
-### FusionAuth Configuration
-
-The kickstart configuration includes:
-
-- **Express Passport Application**: Pre-configured OAuth application for this project
-- **API Key**: For programmatic access
-- **Email Templates**: Magic link and 2FA templates
-- **Custom Theme**: Styled interface
-- **Test Users**: Admin and regular user accounts
-
-### FusionAuth URLs
-
-- **FusionAuth Admin**: <http://localhost:9011>
-- **MailCatcher**: <http://localhost:1080> (for email testing)
-- **Express App**: <http://localhost:3000>
-
-### Application Details
-
 - **Application ID**: `f47ac10b-58cc-4372-a567-0e02b2c3d479`
 - **Client Secret**: `super-secret-secret-that-should-be-regenerated-for-production`
 - **Redirect URL**: `http://localhost:3000/auth/fusionauth/callback`
-
-## Migration Scripts
-
-This project includes both generic FusionAuth migration scripts and legacy scripts for user migration.
-
-### Generic Pattern Scripts (Recommended)
-
-Following the FusionAuth generic import pattern with streaming JSON processing:
-
-```bash
-# 1. Export users from SQLite database
-npm run export
-
-# 2. Convert users to FusionAuth format
-npm run convert
-
-# 3. Import users (choose one method):
-npm run import              # Individual imports (like generic pattern)
-npm run import:bulk         # Bulk imports (faster for large datasets)
-npm run import:social       # Social/OAuth users with identity linking
-```
-
-**Features:**
-- ✅ **Streaming JSON processing** - Memory efficient for large datasets
-- ✅ **UUID password generation** - For users without passwords (OAuth users)
-- ✅ **Identity linking support** - Links Google OAuth accounts
-- ✅ **Bcrypt hash parsing** - Preserves existing password hashes
-- ✅ **Batch processing** - Configurable batch sizes for bulk imports
-
-### Legacy Scripts (Alternative)
-
-```bash
-# Export users to FusionAuth format (all-in-one)
-npm run export:legacy
-
-# Import users to FusionAuth (bulk)
-npm run import:legacy users_export_2024-01-15T10-30-00-000Z.json
-
-# Import users individually (for debugging)
-npm run import:individual users_export_2024-01-15T10-30-00-000Z.json
-```
-
-### Migration Workflow
-
-1. **Setup FusionAuth**: `npm run fusionauth:up`
-2. **Export users**: `npm run export` 
-3. **Convert format**: `npm run convert`
-4. **Import users**: `npm run import:bulk` (recommended for speed)
-5. **Import social users**: `npm run import:social` (if you have OAuth users)
-
-### Generated Files
-
-- `users.json` - Raw user export from SQLite
-- `faUsers.json` - FusionAuth-formatted users ready for import
-
