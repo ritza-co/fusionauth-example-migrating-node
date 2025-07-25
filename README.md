@@ -14,28 +14,32 @@ A complete Express.js authentication system with Passport.js, featuring both loc
 
 ## Prerequisites
 
-- Node.js 18.0.0 or higher
-- npm 8.0.0 or higher
+- Node.js 22.0.0 or higher
+- npm 10.0.0 or higher
 
 ## Installation
 
 1. Clone the repository:
+
 ```bash
-git clone <repository-url>
-cd fusionauth-import-node-passport-example
+git clone https://github.com/ritza-co/fusionauth-migrating-node-express-passportjs-example.git webApp
+cd webApp
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 cp config.env.example .env
 ```
 
 Edit `.env` and configure:
+
 ```env
 # Server Configuration
 PORT=3000
@@ -51,25 +55,29 @@ GOOGLE_CLIENT_SECRET=your-google-client-secret
 ```
 
 4. Set up the database and seed test users:
+
 ```bash
 npm run setup
 ```
 
 5. (Optional) Start FusionAuth for migration testing:
+
 ```bash
 npm run fusionauth:up
 ```
 
-FusionAuth will be available at: http://localhost:9011
+FusionAuth will be available at: <http://localhost:9011>
 
 ## Usage
 
 ### Development
+
 ```bash
 npm run dev
 ```
 
 ### Production
+
 ```bash
 npm start
 ```
@@ -96,7 +104,7 @@ The setup script creates these test accounts (password: `password123`):
 
 ## Project Structure
 
-```
+```txt
 ├── app.js                 # Main application file
 ├── package.json           # Dependencies and scripts
 ├── .env.example          # Environment variables template
@@ -126,6 +134,7 @@ The setup script creates these test accounts (password: `password123`):
 ## Database Schema
 
 ### Users Table
+
 ```sql
 CREATE TABLE users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -144,6 +153,7 @@ CREATE TABLE users (
 ```
 
 ### Sessions Table
+
 ```sql
 CREATE TABLE sessions (
   session_id TEXT PRIMARY KEY,
@@ -155,6 +165,7 @@ CREATE TABLE sessions (
 ## API Endpoints
 
 ### Authentication
+
 - `GET /login` - Login page
 - `POST /login` - Local authentication
 - `GET /register` - Registration page
@@ -164,6 +175,7 @@ CREATE TABLE sessions (
 - `GET /auth/google/callback` - Google OAuth callback
 
 ### User Management
+
 - `GET /profile` - User profile page
 - `POST /profile` - Update profile
 - `GET /dashboard` - Dashboard overview
@@ -191,6 +203,7 @@ npm run fusionauth:down
 ### FusionAuth Configuration
 
 The kickstart configuration includes:
+
 - **Express Passport Application**: Pre-configured OAuth application for this project
 - **API Key**: For programmatic access
 - **Email Templates**: Magic link and 2FA templates
@@ -199,9 +212,9 @@ The kickstart configuration includes:
 
 ### FusionAuth URLs
 
-- **FusionAuth Admin**: http://localhost:9011
-- **MailCatcher**: http://localhost:1080 (for email testing)
-- **Express App**: http://localhost:3000
+- **FusionAuth Admin**: <http://localhost:9011>
+- **MailCatcher**: <http://localhost:1080> (for email testing)
+- **Express App**: <http://localhost:3000>
 
 ### Application Details
 
@@ -209,44 +222,57 @@ The kickstart configuration includes:
 - **Client Secret**: `super-secret-secret-that-should-be-regenerated-for-production`
 - **Redirect URL**: `http://localhost:3000/auth/fusionauth/callback`
 
-## Migration to FusionAuth
+## Migration Scripts
 
-This application is structured to make migration to FusionAuth straightforward:
+This project includes both generic FusionAuth migration scripts and legacy scripts for user migration.
 
-1. **User Data**: All user information is stored in a structured format
-2. **Password Hashing**: Uses bcrypt with configurable factor (10)
-3. **OAuth Integration**: Google OAuth data is preserved
-4. **Session Management**: Session data can be migrated
-5. **Export Script**: Ready for creating FusionAuth-compatible export
+### Generic Pattern Scripts (Recommended)
 
-The export script (to be created) will generate JSON in FusionAuth's expected format, including:
-- User credentials with bcrypt parsing
-- OAuth provider information
-- User metadata and timestamps
-- Application registrations
+Following the FusionAuth generic import pattern with streaming JSON processing:
 
-## Development
-
-### Running Tests
 ```bash
-npm test
+# 1. Export users from SQLite database
+npm run export
+
+# 2. Convert users to FusionAuth format
+npm run convert
+
+# 3. Import users (choose one method):
+npm run import              # Individual imports (like generic pattern)
+npm run import:bulk         # Bulk imports (faster for large datasets)
+npm run import:social       # Social/OAuth users with identity linking
 ```
 
-### Database Reset
+**Features:**
+- ✅ **Streaming JSON processing** - Memory efficient for large datasets
+- ✅ **UUID password generation** - For users without passwords (OAuth users)
+- ✅ **Identity linking support** - Links Google OAuth accounts
+- ✅ **Bcrypt hash parsing** - Preserves existing password hashes
+- ✅ **Batch processing** - Configurable batch sizes for bulk imports
+
+### Legacy Scripts (Alternative)
+
 ```bash
-rm db/users.db
-npm run setup
+# Export users to FusionAuth format (all-in-one)
+npm run export:legacy
+
+# Import users to FusionAuth (bulk)
+npm run import:legacy users_export_2024-01-15T10-30-00-000Z.json
+
+# Import users individually (for debugging)
+npm run import:individual users_export_2024-01-15T10-30-00-000Z.json
 ```
 
-## Security Considerations
+### Migration Workflow
 
-- Change the session secret in production
-- Use HTTPS in production
-- Implement proper input validation
-- Add rate limiting for authentication endpoints
-- Consider adding CSRF protection
-- Implement proper error handling
+1. **Setup FusionAuth**: `npm run fusionauth:up`
+2. **Export users**: `npm run export` 
+3. **Convert format**: `npm run convert`
+4. **Import users**: `npm run import:bulk` (recommended for speed)
+5. **Import social users**: `npm run import:social` (if you have OAuth users)
 
-## License
+### Generated Files
 
-MIT License - see LICENSE file for details. 
+- `users.json` - Raw user export from SQLite
+- `faUsers.json` - FusionAuth-formatted users ready for import
+

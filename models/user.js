@@ -134,36 +134,46 @@ class User {
   static async seedTestUsers() {
     const testUsers = [
       {
-        email: 'admin@example.com',
-        password: 'password123',
-        name: 'Admin User',
+        email: 'sarah.johnson@techcorp.com',
+        password: 'SecurePass2024!',
+        name: 'Sarah Johnson',
         provider: 'local',
         verified: true,
         active: true
       },
       {
-        email: 'user@example.com',
-        password: 'password123',
-        name: 'Regular User',
+        email: 'mike.chen@startup.io',
+        password: 'MyStr0ngP@ss',
+        name: 'Mike Chen',
         provider: 'local',
         verified: true,
         active: true
       },
       {
-        email: 'test@example.com',
-        password: 'password123',
-        name: 'Test User',
-        provider: 'local',
-        verified: true,
-        active: true
-      },
-      {
-        email: 'unconfirmed@example.com',
-        password: 'password123',
-        name: 'Unconfirmed User',
+        email: 'emma.wilson@freelancer.com',
+        password: 'WorkLife2024',
+        name: 'Emma Wilson',
         provider: 'local',
         verified: false,
-        active: false
+        active: true
+      },
+      {
+        email: 'alex.rodriguez@gmail.com',
+        name: 'Alex Rodriguez',
+        googleId: '108234567890123456789',
+        avatar: 'https://lh3.googleusercontent.com/a/ACg8ocKxVzAbc123def456ghi789jkl012mno345pqr678stu901vwx=s96-c',
+        provider: 'google_oauth2',
+        verified: true,
+        active: true
+      },
+      {
+        email: 'jessica.taylor@outlook.com',
+        name: 'Jessica Taylor',
+        googleId: '987654321098765432109',
+        avatar: 'https://lh3.googleusercontent.com/a/ACg8ocLmNoPqRsT987uvw654xyz321abc098def765ghi432jkl109mnop=s96-c',
+        provider: 'google_oauth2',
+        verified: true,
+        active: true
       }
     ];
 

@@ -7,7 +7,10 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "setup": "npm install && node scripts/setup.js",
-    "export": "node scripts/export_users_for_fusionauth.js",
+    "export": "node scripts/4_exportUsers.mjs",
+    "convert": "node scripts/5_convertUserToFaUser.mjs",
+    "import": "node scripts/6_importUsersBulk.mjs",
+    "import:social": "node scripts/7_importSocialUsers.mjs",
     "test": "jest",
     "fusionauth:up": "docker compose up -d --build",
     "fusionauth:down": "docker compose down",
@@ -35,7 +38,10 @@
     "body-parser": "^1.20.2",
     "express-flash": "^0.0.2",
     "ejs": "^3.1.9",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "@fusionauth/typescript-client": "^1.53.0",
+    "stream-json": "^1.8.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1",

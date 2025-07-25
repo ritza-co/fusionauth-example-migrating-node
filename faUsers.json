@@ -1,0 +1,70 @@
+[
+    {
+        "active": true,
+        "data": {
+            "google_id": "108234567890123456789",
+            "ImportedFromExpressPassport": true,
+            "oauth_provider": "google",
+            "original_user_id": 8,
+            "provider": "google_oauth2",
+            "source_system": "express_passport"
+        },
+        "email": "alex.rodriguez@gmail.com",
+        "encryptionScheme": "bcrypt",
+        "factor": 10,
+        "firstName": "Alex",
+        "id": "875d08c3-1bda-455e-ad79-306314f57820",
+        "insertInstant": 1753413898000,
+        "lastName": "Rodriguez",
+        "lastUpdateInstant": 1753413898000,
+        "password": "99c16de7-ad0f-40d5-8a63-48236e1c0aa4",
+        "passwordChangeRequired": false,
+        "registrations": [
+            {
+                "applicationId": "e9fdb985-9173-4e01-9d73-ac2d60d1dc8e",
+                "roles": [
+                    "user"
+                ]
+            }
+        ],
+        "salt": "",
+        "tenantId": "d7d09513-a3f5-401c-9685-34ab6c552453",
+        "uniqueUsername": "alex.rodriguez@gmail.com",
+        "username": "alex.rodriguez@gmail.com",
+        "verified": true
+    },
+    {
+        "active": true,
+        "data": {
+            "google_id": "987654321098765432109",
+            "ImportedFromExpressPassport": true,
+            "oauth_provider": "google",
+            "original_user_id": 9,
+            "provider": "google_oauth2",
+            "source_system": "express_passport"
+        },
+        "email": "jessica.taylor@outlook.com",
+        "encryptionScheme": "bcrypt",
+        "factor": 10,
+        "firstName": "Jessica",
+        "id": "88381bac-14c1-42a3-8b31-fd64c94399db",
+        "insertInstant": 1753413898000,
+        "lastName": "Taylor",
+        "lastUpdateInstant": 1753413898000,
+        "password": "bbbc7e92-c693-47c5-86bd-e86d0da92819",
+        "passwordChangeRequired": false,
+        "registrations": [
+            {
+                "applicationId": "e9fdb985-9173-4e01-9d73-ac2d60d1dc8e",
+                "roles": [
+                    "user"
+                ]
+            }
+        ],
+        "salt": "",
+        "tenantId": "d7d09513-a3f5-401c-9685-34ab6c552453",
+        "uniqueUsername": "jessica.taylor@outlook.com",
+        "username": "jessica.taylor@outlook.com",
+        "verified": true
+    }
+]
