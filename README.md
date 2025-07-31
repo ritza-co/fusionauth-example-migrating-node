@@ -12,7 +12,7 @@ A complete Express.js authentication system with Passport.js, featuring both loc
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/ritza-co/fusionauth-migrating-node-express-passportjs-example.git webApp
+git clone https://github.com/fusionauth/fusionauth-migrating-node-express-passportjs-example.git webApp
 cd webApp
 ```
 
@@ -74,14 +74,6 @@ npm start
 
 The application will be available at `http://localhost:3000`
 
-## Test Accounts
-
-The setup script creates these test accounts (password: `password123`):
-
-- `admin@example.com` - Admin User
-- `user@example.com` - Regular User  
-- `test@example.com` - Test User
-- `unconfirmed@example.com` - Unconfirmed User (inactive)
 
 ## Google OAuth Setup
 
