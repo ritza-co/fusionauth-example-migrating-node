@@ -39,34 +39,6 @@
       "tenantId": "#{defaultTenantId}",
       "body": {
         "application": {
-          "name": "Start Here App",
-          "oauthConfiguration": {
-            "authorizedRedirectURLs": [
-              "http://localhost:8080/oauth-redirect"
-            ],
-            "logoutURL": "http://localhost:8080/oauth2/logout",
-            "clientSecret": "#{clientSecret}",
-            "enabledGrants": [
-              "authorization_code",
-              "refresh_token"
-            ],
-            "generateRefreshTokens": true,
-            "requireRegistration": true
-          },
-          "jwtConfiguration": {
-            "enabled": true,
-            "accessTokenKeyId": "#{asymmetricKeyId}",
-            "idTokenKeyId": "#{asymmetricKeyId}"
-          }
-        }
-      }
-    },
-    {
-      "method": "POST",
-      "url": "/api/application/#{expressPassportApplicationId}",
-      "tenantId": "#{defaultTenantId}",
-      "body": {
-        "application": {
           "name": "Express Passport Auth",
           "oauthConfiguration": {
             "authorizedRedirectURLs": [
