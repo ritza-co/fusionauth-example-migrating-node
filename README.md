@@ -12,7 +12,7 @@ A complete Express.js authentication system with Passport.js, featuring both loc
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/fusionauth/fusionauth-migrating-node-express-passportjs-example.git webApp
+git clone https://github.com/fusionauth/fusionauth-example-migrating-node.git webApp
 cd webApp
 ```
 
@@ -153,6 +153,5 @@ npm run fusionauth:logs
 npm run fusionauth:down
 ```
 
-- **Application ID**: `f47ac10b-58cc-4372-a567-0e02b2c3d479`
 - **Client Secret**: `super-secret-secret-that-should-be-regenerated-for-production`
 - **Redirect URL**: `http://localhost:3000/auth/fusionauth/callback`
