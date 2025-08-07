@@ -1,6 +1,9 @@
-# Express Passport Authentication Example
+# Example Express Application Using Passport For Authentication
 
-A complete Express.js authentication system with Passport.js, featuring both local authentication (email/password) and OAuth (Google), designed for migration to FusionAuth.
+This example Express application uses Passport for authentication. Two common strategies are implemented:
+
+* `passport-local`: Username-and-password authentication using credentials stored in the application's database.
+* `passport-google-oauth20`: OAuth social login using Google.
 
 ## Prerequisites
 
@@ -9,26 +12,26 @@ A complete Express.js authentication system with Passport.js, featuring both loc
 
 ## Installation
 
-1. Clone the repository:
+Clone the repository.
 
 ```bash
 git clone https://github.com/fusionauth/fusionauth-example-migrating-node.git webApp
 cd webApp
 ```
 
-2. Install dependencies:
+Install dependencies.
 
 ```bash
 npm install
 ```
 
-3. Set up environment variables:
+Set up environment variables.
 
 ```bash
 cp config.env.example .env
 ```
 
-Edit `.env` and configure:
+Update `.env` with the following configuration.
 
 ```env
 # Server Configuration
@@ -44,19 +47,19 @@ GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 ```
 
-4. Set up the database and seed test users:
+Set up the database and seed test users.
 
 ```bash
 npm run setup
 ```
 
-5. (Optional) Start FusionAuth for migration testing:
+(Optional) Start FusionAuth for migration testing.
 
 ```bash
 npm run fusionauth:up
 ```
 
-FusionAuth will be available at: <http://localhost:9011>
+FusionAuth will be available at `http://localhost:9011`.
 
 ## Usage
 
@@ -72,17 +75,17 @@ npm run dev
 npm start
 ```
 
-The application will be available at `http://localhost:3000`
+The application will be available at `http://localhost:3000`.
 
 
 ## Google OAuth Setup
 
-1. Go to [Google Cloud Console](https://console.developers.google.com/)
-2. Create a new project or select an existing one
-3. Enable the Google+ API
-4. Go to "Credentials" and create an OAuth 2.0 Client ID
-5. Add `http://localhost:3000/auth/google/callback` to the authorized redirect URIs
-6. Copy the Client ID and Client Secret to your `.env` file
+1. Go to [Google Cloud Console](https://console.developers.google.com/).
+2. Create a new project or select an existing one.
+3. Enable the Google+ API.
+4. Go to "Credentials" and create an OAuth 2.0 Client ID.
+5. Add `http://localhost:3000/auth/google/callback` to the authorized redirect URIs.
+6. Copy the Client ID and Client Secret to your `.env` file.
 
 ## Database Schema
 
@@ -119,26 +122,26 @@ CREATE TABLE sessions (
 
 ### Authentication
 
-- `GET /login` - Login page
-- `POST /login` - Local authentication
-- `GET /register` - Registration page
-- `POST /register` - User registration
-- `GET /logout` - Logout
-- `GET /auth/google` - Google OAuth login
-- `GET /auth/google/callback` - Google OAuth callback
+- `GET /login`: Login page
+- `POST /login`: Local authentication
+- `GET /register`: Registration page
+- `POST /register`: User registration
+- `GET /logout`: Logout
+- `GET /auth/google`: Google OAuth login
+- `GET /auth/google/callback`: Google OAuth callback
 
 ### User Management
 
-- `GET /profile` - User profile page
-- `POST /profile` - Update profile
-- `GET /dashboard` - Dashboard overview
-- `GET /users` - User management
-- `POST /users/:id/delete` - Delete user
-- `POST /users/:id/toggle-active` - Toggle user status
+- `GET /profile`: User profile page
+- `POST /profile`: Update profile
+- `GET /dashboard`: Dashboard overview
+- `GET /users`: User management
+- `POST /users/:id/delete`: Delete user
+- `POST /users/:id/toggle-active` : Toggle user status
 
 ## FusionAuth Integration
 
-This project includes a pre-configured FusionAuth instance for testing migrations:
+This project includes a pre-configured FusionAuth instance for testing migrations.
 
 ### Running FusionAuth
 
@@ -153,5 +156,5 @@ npm run fusionauth:logs
 npm run fusionauth:down
 ```
 
-- **Client Secret**: `super-secret-secret-that-should-be-regenerated-for-production`
-- **Redirect URL**: `http://localhost:3000/auth/fusionauth/callback`
+- **Client Secret:** `super-secret-secret-that-should-be-regenerated-for-production`
+- **Redirect URL:** `http://localhost:3000/auth/fusionauth/callback`
